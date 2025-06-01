@@ -1,0 +1,26 @@
+name: 'Qt C++ CI'
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      # Установка Qt (выбираем версию)
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.0'  # или '5.15.2' для Qt5
+          modules: qtbase qttools qtdeclarative  # нужные модули
+
+      # Сборка через CMake
+      - run: cmake -B build -DPATCH_VERSION=${{ github.run_number }}
+      - run: cmake --build build --parallel
