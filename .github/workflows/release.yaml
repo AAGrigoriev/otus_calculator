@@ -11,16 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
-      # Установка Qt (выбираем версию)
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
-          version: '6.5.0'  # или '5.15.2' для Qt5
-          modules: qt6-base qt6-base-dev # нужные модули
-
+          version: '6.5.0'
+          modules: 'qtbase qttools'
+          
       # Сборка через CMake
       - run: cmake -B build -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build build --parallel
