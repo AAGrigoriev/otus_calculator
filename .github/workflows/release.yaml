@@ -19,7 +19,7 @@ jobs:
         uses: jurplel/install-qt-action@v3
         with:
           version: '6.5.0'  # или '5.15.2' для Qt5
-          modules: qtbase qttools qtdeclarative  # нужные модули
+          modules: qt6-base qt6-base-dev # нужные модули
 
       # Сборка через CMake
       - run: cmake -B build -DPATCH_VERSION=${{ github.run_number }}
