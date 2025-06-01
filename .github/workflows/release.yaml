@@ -13,10 +13,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version: '6.5.0'
-          modules: 'qtbase qttools'
+        uses: jurplel/install-qt-action@v4
           
       # Сборка через CMake
       - run: cmake -B build -DPATCH_VERSION=${{ github.run_number }}
